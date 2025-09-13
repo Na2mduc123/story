@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đóng góp ý kiến</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, sans-serif;
+        background: linear-gradient(135deg, #74ebd5 0%, #9face6 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .container {
+        background: #fff;
+        padding: 30px 25px;
+        border-radius: 16px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        width: 350px;
+        text-align: center;
+        animation: fadeIn 0.5s ease-in-out;
+      }
+
+      h2 {
+        margin-bottom: 20px;
+        font-size: 22px;
+        color: #333;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        margin: 10px 0;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+      }
+
+      input:focus,
+      textarea:focus {
+        border-color: #6c63ff;
+        box-shadow: 0 0 6px rgba(108, 99, 255, 0.4);
+        outline: none;
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        margin-top: 12px;
+        border: none;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #6c63ff, #48c6ef);
+        color: white;
+        font-size: 15px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+      }
+
+      .thank-you {
+        font-size: 20px;
+        font-weight: bold;
+        color: #28a745;
+        animation: popIn 0.6s ease forwards;
+      }
+
+      .error {
+        color: #e63946;
+        font-size: 14px;
+        margin-top: 8px;
+        animation: fadeIn 0.3s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes popIn {
+        0% {
+          transform: scale(0.8);
+          opacity: 0;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" id="formContainer">
+      <h2>Đóng góp ý kiến</h2>
+      <input type="text" id="name" placeholder="Nhập tên của bạn" />
+      <input
+        type="email"
+        id="email"
+        placeholder="Nhập email của bạn (không bắt buộc)"
+      />
+      <input type="text" id="title" placeholder="Tiêu đề" />
+      <textarea
+        id="content"
+        rows="4"
+        placeholder="Nhập nội dung"
+        required
+      ></textarea>
+      <button onclick="submitForm()">Gửi</button>
+      <div id="errorMessage"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+      // Khởi tạo EmailJS (thay bằng public key của bạn trong EmailJS)
+      (function () {
+        emailjs.init("6lVan0Npbg_ERULfN"); // PUBLIC_KEY
+      })();
+
+      function submitForm() {
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const title = document.getElementById("title").value.trim();
+        const content = document.getElementById("content").value.trim();
+        const errorDiv = document.getElementById("errorMessage");
+
+        if (content) {
+          // Gửi email qua EmailJS
+          emailjs
+            .send("service_smpphp9", "template_lznr889", {
+              name: name || "Ẩn danh",
+              email: email || "Không cung cấp",
+              title: title || "Không có tiêu đề",
+              message: content,
+              time: new Date().toLocaleString(),
+            })
+            .then(
+              function () {
+                document.getElementById("formContainer").innerHTML =
+                  '<div class="thank-you"> Cảm ơn bạn đã đóng góp</div>';
+
+                // Sau 5 giây tự động quay về trang chủ
+                setTimeout(() => {
+                  window.location.href = "./section2.html";
+                }, 5000);
+              },
+              function (error) {
+                errorDiv.innerHTML =
+                  '<p class="error"> Lỗi khi gửi: ' + error.text + "</p>";
+              }
+            );
+        } else {
+          errorDiv.innerHTML =
+            '<p class="error"> Vui lòng nhập nội dung đóng góp.</p>';
+        }
+      }
+    </script>
+  </body>
+</html>
