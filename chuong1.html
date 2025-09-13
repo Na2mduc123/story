@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <title>Chương 1: Làm quen</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #1a1c2c, #3a3d5c);
+        color: #fff;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .chapter {
+        max-width: 800px;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        display: none; /* Ẩn ban đầu */
+      }
+      h2 {
+        margin-top: 0;
+        font-size: 28px;
+        color: #ffd166;
+        text-align: center;
+      }
+      p {
+        line-height: 1.6;
+        font-size: 18px;
+        margin: 16px 0;
+        text-align: justify;
+      }
+      .setup {
+        text-align: center;
+      }
+      select,
+      button {
+        padding: 10px 14px;
+        margin: 6px;
+        border-radius: 6px;
+        border: none;
+        font-size: 16px;
+      }
+      button {
+        cursor: pointer;
+        background: #ffd166;
+        color: #222;
+        font-weight: bold;
+      }
+      .error {
+        color: #ff4d4d;
+        margin-top: 8px;
+      }
+      .popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 0, 0, 0.8);
+        padding: 30px 40px;
+        border-radius: 10px;
+        font-size: 20px;
+        font-weight: bold;
+        color: #ffd166;
+        display: none;
+      }
+      .back-btn {
+        color: #ffd166;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="setup">
+      <h2>Chọn mốc thời gian làm quen con gái nhà người ta</h2>
+      <select id="timeSelect">
+        <option value="">-- Chọn --</option>
+        <option value="1">1 tháng</option>
+        <option value="3">3 tháng</option>
+        <option value="5">5 tháng</option>
+        <option value="12">1 năm</option>
+      </select>
+      <button id="confirmBtn">Xác nhận</button>
+      <div id="errorMsg" class="error"></div>
+    </div>
+
+    <div class="chapter" id="chapterContent">
+      <h2>Chương 1: Làm quen rồi làm bạn</h2>
+      <p>
+        <i
+          >Đúng rồi đó, quãng thời gian này kéo dài 5 tháng: Từ 10/2023 - hết
+          2/2024</i
+        >
+      </p>
+      <p>
+        Cũng không phải mới quen mà thực ra là đã quen từ năm nhất đại học rồi.
+        Nhưng đến tận bây giờ mới nói chuyện và chia sẻ nhiều câu chuyện với
+        nhau
+      </p>
+      <p>
+        Hai đứa cùng học chung 1 lớp, khi lớp tôi chuyên ngành ý chỉ có đúng 1
+        nữ
+      </p>
+      <p>
+        Lúc đầu tôi cũng giữ mối quan hệ này như 2 đứa bạn bình thường nhưng lâu
+        dần tôi như có 1 cảm giác đặc biệt với cô ấy, hai đứa bắt đầu nhắn tin,
+        nói chuyện nhiều hơn và tôi thấy cái mqh này nó hợp lắm luôn ấy, lần
+        đồng hành cùng nhau đầu tiên là đợt thực tập năm ấy
+      </p>
+      <p>Chương 1 có vậy thôi</p>
+      <a
+        href="section2.html"
+        class="back-btn"
+        onclick="localStorage.setItem('chapterUnlocked', '2')"
+      >
+        ⬅ Quay lại
+      </a>
+    </div>
+
+    <div class="popup" id="popup">Vừa vặn rồi đó</div>
+
+    <script>
+      localStorage.setItem("chapterUnlocked", "2");
+
+      const confirmBtn = document.getElementById("confirmBtn");
+      const timeSelect = document.getElementById("timeSelect");
+      const errorMsg = document.getElementById("errorMsg");
+      const popup = document.getElementById("popup");
+      const chapterContent = document.getElementById("chapterContent");
+      const setup = document.querySelector(".setup");
+
+      confirmBtn.addEventListener("click", () => {
+        const value = timeSelect.value;
+        errorMsg.textContent = "";
+
+        if (value === "12") {
+          errorMsg.textContent = "Quá dài, ông có làm được việc không";
+        } else if (value === "1" || value === "3") {
+          errorMsg.textContent = "Hơi ngắn nhỉ";
+        } else if (value === "5") {
+          popup.style.display = "block";
+          setTimeout(() => {
+            popup.style.display = "none";
+            setup.style.display = "none";
+            chapterContent.style.display = "block";
+          }, 2000);
+        }
+      });
+    </script>
+  </body>
+</html>

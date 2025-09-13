@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Khám phá nốt trầm</title>
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        background: linear-gradient(135deg, #ff6f61, #d72638);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+      }
+
+      h1 {
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #fff;
+        font-size: 22px;
+        white-space: nowrap;
+      }
+      .dep {
+        position: absolute;
+        top: 60px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #fff;
+        font-size: 18px;
+      }
+      .circle {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+        cursor: grab;
+        position: absolute;
+        user-select: none;
+      }
+      #me {
+        background: #118ab2;
+        top: 50%;
+        left: 20%;
+        transform: translate(-50%, -50%);
+      }
+      #her {
+        background: #ef476f;
+        top: 50%;
+        left: 70%;
+        transform: translate(-50%, -50%);
+        transition: all 0.3s ease;
+      }
+      .button-container {
+        position: absolute;
+        bottom: 40px;
+        text-align: center;
+      }
+      .btn {
+        padding: 12px 20px;
+        font-size: 16px;
+        border-radius: 8px;
+        background: #ffd166;
+        color: #333;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.3s;
+        text-decoration: none;
+      }
+      .btn:hover {
+        background: #ffb703;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Đây là khoảng cách cũng như cảm xúc của cô ấy mỗi khi tôi đến gần</h1>
+    <div class="dep">(Kéo tôi gần cô ấy để hiểu rõ hơn)</div>
+    <div id="me" class="circle">Tôi</div>
+    <div id="her" class="circle">Cô ấy</div>
+
+    <!-- Nút chuyển sang file lý do -->
+    <div class="button-container">
+      <a href="./lydo.html" class="btn">Tìm hiểu lý do</a>
+    </div>
+
+    <script>
+      const me = document.getElementById("me");
+      const her = document.getElementById("her");
+      let isDragging = false;
+
+      let offsetX, offsetY;
+
+      me.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        offsetX = e.clientX - me.offsetLeft;
+        offsetY = e.clientY - me.offsetTop;
+        me.style.cursor = "grabbing";
+      });
+
+      document.addEventListener("mouseup", () => {
+        isDragging = false;
+        me.style.cursor = "grab";
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+        const x = e.clientX - offsetX;
+        const y = e.clientY - offsetY;
+        me.style.left = x + "px";
+        me.style.top = y + "px";
+
+        const meRect = me.getBoundingClientRect();
+        const herRect = her.getBoundingClientRect();
+
+        const dx = meRect.left - herRect.left;
+        const dy = meRect.top - herRect.top;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < 150) {
+          const newX = Math.random() * (window.innerWidth - 120) + 60;
+          const newY = Math.random() * (window.innerHeight - 120) + 60;
+          her.style.left = newX + "px";
+          her.style.top = newY + "px";
+        }
+      });
+    </script>
+  </body>
+</html>

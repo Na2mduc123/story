@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Lý do</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #06beb6, #48b1bf);
+        color: #fff;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .box {
+        max-width: 600px;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        text-align: center;
+      }
+      h2 {
+        margin-top: 0;
+        font-size: 26px;
+        color: #ffd166;
+      }
+      select,
+      button {
+        padding: 8px 12px;
+        font-size: 16px;
+        border-radius: 6px;
+        border: none;
+        margin: 8px;
+      }
+      .error {
+        color: #ff4d4d;
+        margin-top: 12px;
+        font-weight: bold;
+      }
+      .center-msg {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 0, 0, 0.85);
+        padding: 20px 30px;
+        border-radius: 10px;
+        font-size: 22px;
+        font-weight: bold;
+        color: #ffd166;
+        display: none;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <h2>Theo bạn, lý do là gì?</h2>
+      <select id="reasonSelect">
+        <option value="">-- Chọn lý do --</option>
+        <option value="notgood">Vì tôi không đủ tốt</option>
+        <option value="distance">Vì vấn đề địa lý</option>
+      </select>
+      <button onclick="checkReason()">Xác nhận</button>
+      <div id="reasonMsg" class="error"></div>
+    </div>
+
+    <div id="centerMsg" class="center-msg">Thường là vậy mà</div>
+
+    <script>
+      function checkReason() {
+        const reason = document.getElementById("reasonSelect").value;
+        const msgEl = document.getElementById("reasonMsg");
+        const centerMsg = document.getElementById("centerMsg");
+
+        msgEl.textContent = "";
+
+        if (!reason) {
+          msgEl.textContent = "Bạn chưa chọn lý do.";
+          return;
+        }
+
+        if (reason === "notgood") {
+          msgEl.textContent =
+            "Có thể, vì tùy suy nghĩ và cảm xúc của mỗi người mà. Nhưng tôi chắc không phải lý do chính.";
+        } else if (reason === "distance") {
+          centerMsg.style.display = "block";
+          setTimeout(() => {
+            window.location.href = "ketluan.html";
+          }, 3000);
+        }
+      }
+    </script>
+  </body>
+</html>

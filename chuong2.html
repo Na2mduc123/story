@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <title>Chương 2: Thích và tỏ tình</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #16222a, #3a6073);
+        color: #fff;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .box {
+        max-width: 800px;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        text-align: center;
+      }
+      h2 {
+        margin-top: 0;
+        font-size: 28px;
+        color: #ffd166;
+      }
+      p {
+        line-height: 1.6;
+        font-size: 18px;
+        margin: 16px 0;
+        text-align: justify;
+      }
+      .controls {
+        margin-bottom: 20px;
+      }
+      select,
+      button {
+        padding: 8px 12px;
+        font-size: 16px;
+        border-radius: 6px;
+        border: none;
+        margin: 5px;
+      }
+      .error {
+        color: red;
+        margin-top: 10px;
+        font-weight: bold;
+      }
+      .center-msg {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 0, 0, 0.8);
+        padding: 20px 30px;
+        border-radius: 10px;
+        font-size: 22px;
+        font-weight: bold;
+        color: #ffd166;
+        display: none;
+      }
+      .back-btn {
+        display: block;
+        margin-top: 20px;
+        text-align: center;
+        padding: 10px;
+        background: #ffd166;
+        color: #333;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      #chapterContent {
+        display: none; /* ẩn nội dung chương cho tới khi chọn đúng */
+      }
+      a {
+        color: #ffd166;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <!-- Chọn món quà -->
+      <div class="controls" id="giftSection">
+        <label for="giftSelect">Chọn món quà đầu tiên: </label>
+        <select id="giftSelect">
+          <option value="">-- Chọn quà --</option>
+          <option value="hoa">Hoa</option>
+          <option value="banhkeo">Bánh kẹo</option>
+          <option value="gaubong">Gấu bông</option>
+          <option value="quanao">Quần áo</option>
+        </select>
+        <button onclick="chooseGift()">Tặng quà</button>
+        <div id="giftMsg" class="error"></div>
+      </div>
+
+      <!-- Nội dung chương -->
+      <div id="chapterContent">
+        <h2>Chương 2: Thích và tỏ tình</h2>
+        <p><i>Giai đoạn này kéo dài từ 3/2024 - đầu 7/2024</i></p>
+        <p>
+          Sau vài tháng trò chuyện, cô dần trở thành một phần trong cuộc sống
+          của tôi. Mỗi tin nhắn, mỗi lần gặp gỡ đều khiến anh cảm thấy ngày càng
+          gắn bó hơn.
+        </p>
+        <p>
+          Lần đồng hành thứ 2 của 2 đứa là khi đi quân sự, lúc đó đã bước vào
+          giai đoạn tìm hiểu rồi
+        </p>
+        <p>
+          Sau khi về, tôi biết tôi không thể giữ được cái cảm xúc nó cứ trực
+          trào tuôn ra nữa, một ngày đầu tháng 6, tôi tặng quà cô ấy, nói tôi
+          thích cô ấy và khẳng định đây là thật lòng
+        </p>
+        <p>
+          Rồi cái gì đến cũng phải đến, bạn thử đoán xem tôi tỏ tình cô ấy vào
+          dịp nào
+          <a href="./doan.html">Đoán thôi</a>
+        </p>
+
+        <a
+          href="section2.html"
+          class="back-btn"
+          onclick="localStorage.setItem('chapterUnlocked', '3')"
+        >
+          ⬅ Quay lại
+        </a>
+      </div>
+    </div>
+
+    <!-- Thông báo chính giữa -->
+    <div id="centerMsg" class="center-msg">Chuẩn rồi đấy</div>
+
+    <script>
+      function chooseGift() {
+        const gift = document.getElementById("giftSelect").value;
+        const msgEl = document.getElementById("giftMsg");
+        const centerMsg = document.getElementById("centerMsg");
+        const chapter = document.getElementById("chapterContent");
+        const giftSection = document.getElementById("giftSection");
+
+        msgEl.textContent = "";
+
+        if (!gift) {
+          msgEl.textContent = "Bạn chưa chọn món quà nào.";
+          return;
+        }
+
+        if (gift === "hoa") {
+          msgEl.textContent = "Tôi không chọn cái này.";
+        } else if (gift === "banhkeo") {
+          msgEl.textContent =
+            "Lần đầu tiên tôi không biết cô ấy thích ăn gì nên không chọn.";
+        } else if (gift === "quanao") {
+          msgEl.textContent = "Tôi không biết gu cô ấy thế nào.";
+        } else if (gift === "gaubong") {
+          centerMsg.style.display = "block";
+          setTimeout(() => {
+            centerMsg.style.display = "none";
+            giftSection.style.display = "none"; // ẩn phần chọn quà
+            chapter.style.display = "block"; // hiện nội dung chương
+          }, 2000);
+        }
+      }
+    </script>
+  </body>
+</html>

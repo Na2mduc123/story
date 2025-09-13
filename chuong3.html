@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <title>Chương 3: Làm người yêu</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        color: #fff;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .box {
+        max-width: 800px;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        text-align: center;
+      }
+      h2 {
+        margin-top: 0;
+        font-size: 28px;
+        color: #ffd166;
+      }
+      p {
+        line-height: 1.6;
+        font-size: 18px;
+        margin: 16px 0;
+        text-align: justify;
+      }
+      .controls {
+        margin-bottom: 20px;
+      }
+      select,
+      button {
+        padding: 8px 12px;
+        font-size: 16px;
+        border-radius: 6px;
+        border: none;
+        margin: 5px;
+      }
+      .error {
+        color: red;
+        margin-top: 10px;
+        font-weight: bold;
+      }
+      .center-msg {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 0, 0, 0.85);
+        padding: 20px 30px;
+        border-radius: 10px;
+        font-size: 22px;
+        font-weight: bold;
+        color: #ffd166;
+        display: none;
+        text-align: center;
+      }
+      .back-btn {
+        display: block;
+        margin-top: 20px;
+        text-align: center;
+        padding: 10px;
+        background: #ffd166;
+        color: #333;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      #chapterContent {
+        display: none; /* Ẩn cho tới khi chọn đúng */
+      }
+      a {
+        color: #ffd166;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <!-- Bước chọn ý kiến cô ấy -->
+      <div class="controls" id="opinionSection">
+        <label for="opinionSelect">Ý cô ấy sau khi tỏ tình: </label>
+        <select id="opinionSelect">
+          <option value="">-- Chọn --</option>
+          <option value="dongy">Đồng ý</option>
+          <option value="suynghi">Để suy nghĩ thêm</option>
+        </select>
+        <button onclick="checkOpinion()">Xác nhận</button>
+        <div id="opinionMsg" class="error"></div>
+      </div>
+
+      <!-- Nội dung chương -->
+      <div id="chapterContent">
+        <h2>Chương 3: Giai đoạn trên tình bạn dưới tình yêu</h2>
+        <p>Giai đoạn này kéo dài từ giữa 7/2024 - đầu 3/2025</p>
+        <p>
+          Thật vậy, để suy nghĩ thêm là phương án an toàn để không gây hiểu lầm
+          cho đối phương, sau đó chúng tôi bước vào một giai đoạn gọi là "tìm
+          hiểu chuyên sâu"
+        </p>
+        <p>Lần thứ 3 cả hai đồng hành cùng nhau: đi làm hè</p>
+        <p>
+          Cũng trải qua nhiều cung bậc cảm xúc đấy, giai đoạn này cảm xúc của
+          tôi thăng hoa nhất nhưng cô ấy chưa chấp nhận tôi. Tôi hiểu và cũng để
+          cảm xúc nó tiến triển tự nhiên
+        </p>
+        <p>
+          Cuối giai đoạn này có 1 nốt trầm nhỏ
+          <a href="./nottram.html">Khá phá nốt trầm</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Thông báo chính giữa -->
+    <div id="centerMsg" class="center-msg">
+      Đúng rồi, đây là cách an toàn nhất
+    </div>
+
+    <script>
+      function checkOpinion() {
+        const opinion = document.getElementById("opinionSelect").value;
+        const msgEl = document.getElementById("opinionMsg");
+        const opinionSection = document.getElementById("opinionSection");
+        const chapter = document.getElementById("chapterContent");
+        const centerMsg = document.getElementById("centerMsg");
+
+        msgEl.textContent = "";
+
+        if (!opinion) {
+          msgEl.textContent = "Bạn chưa chọn ý kiến nào.";
+          return;
+        }
+
+        if (opinion === "dongy") {
+          msgEl.textContent = "Hmm, cũng phải cân nhắc đã chứ.";
+        } else if (opinion === "suynghi") {
+          centerMsg.style.display = "block";
+          setTimeout(() => {
+            centerMsg.style.display = "none";
+            opinionSection.style.display = "none";
+            chapter.style.display = "block";
+          }, 2000);
+        }
+      }
+    </script>
+  </body>
+</html>
