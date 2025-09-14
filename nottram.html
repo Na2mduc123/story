@@ -7,12 +7,26 @@
       body {
         margin: 0;
         height: 100vh;
-        background: linear-gradient(135deg, #ff6f61, #d72638);
+        background: linear-gradient(135deg, #434343, #2c3e50, #3a1c71, #1a1a1a);
+        background-size: 400% 400%;
         display: flex;
         align-items: center;
         justify-content: center;
         overflow: hidden;
         font-family: Arial, sans-serif;
+        animation: moodFlow 18s ease infinite;
+      }
+
+      @keyframes moodFlow {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
       }
 
       h1 {
@@ -21,12 +35,12 @@
         left: 50%;
         transform: translateX(-50%);
         color: #fff;
-        font-size: 22px;
+
         white-space: nowrap;
       }
       .dep {
         position: absolute;
-        top: 60px;
+        top: 80px;
         left: 50%;
         transform: translateX(-50%);
         color: #fff;
@@ -47,18 +61,20 @@
         user-select: none;
       }
       #me {
-        background: #118ab2;
+        background: #3a6073; /* xanh xám lạnh */
         top: 50%;
         left: 20%;
         transform: translate(-50%, -50%);
       }
+
       #her {
-        background: #ef476f;
+        background: #6a1e55; /* tím rượu vang trầm */
         top: 50%;
         left: 70%;
         transform: translate(-50%, -50%);
         transition: all 0.3s ease;
       }
+
       .button-container {
         position: absolute;
         bottom: 40px;

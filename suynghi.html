@@ -7,32 +7,58 @@
       body {
         font-family: Arial, sans-serif;
         text-align: center;
-        padding-top: 100px;
-        background: #f4f4f9;
+        padding-top: 40px;
+        min-height: 100vh;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: linear-gradient(-45deg, #d16ba5, #c777b9, #ba83ca, #aa8fd8);
+        background-size: 400% 400%;
+        animation: gradientBG 12s ease infinite;
+        color: #fff;
       }
+
+      @keyframes gradientBG {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
       h1 {
-        margin-bottom: 40px;
+        margin-bottom: 20px;
       }
+      p {
+        margin: 10px auto 20px;
+        max-width: 600px;
+        line-height: 1.5;
+      }
+
       button {
-        padding: 12px 24px;
-        margin: 20px;
+        padding: 10px 20px;
+        margin: 10px;
         border: none;
         border-radius: 8px;
         cursor: pointer;
         font-size: 16px;
         font-weight: bold;
         transition: 0.3s;
+        color: #fff;
       }
       .leave {
         background-color: #e74c3c;
-        color: white;
       }
       .stay {
         background-color: #2ecc71;
-        color: white;
       }
       button:hover {
-        opacity: 0.8;
+        opacity: 0.85;
       }
 
       /* Popup nền mờ */
@@ -52,21 +78,20 @@
       /* Nội dung popup */
       .popup-content {
         background: white;
-        padding: 30px;
+        padding: 25px;
         border-radius: 12px;
-        text-align: justify; /* căn đều 2 bên */
+        text-align: justify;
         max-width: 500px;
-        font-size: 16px;
-        font-weight: normal; /* bỏ in đậm */
-        color: #333;
+        font-size: 15px;
+        color: #111;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         animation: fadeIn 0.3s ease-in-out;
       }
 
       /* Nút đóng */
       .close-btn {
-        margin-top: 20px;
-        padding: 10px 20px;
+        margin-top: 15px;
+        padding: 8px 16px;
         border: none;
         border-radius: 6px;
         background: #3498db;
@@ -84,8 +109,8 @@
 
       .back-btn {
         display: inline-block;
-        margin-top: 25px;
-        padding: 10px 20px;
+        margin: 15px 10px 0;
+        padding: 8px 16px;
         background: #ffd166;
         color: #333;
         border-radius: 6px;
@@ -103,6 +128,25 @@
           opacity: 1;
         }
       }
+
+      .gmail {
+        display: block;
+        margin: 20px auto 0;
+        background: none;
+
+        color: #fff;
+        padding: 8px 10px;
+
+        cursor: pointer;
+        font-weight: 600;
+        text-align: center;
+      }
+      .gmail a {
+        color: #695534;
+      }
+      .gmail a:hover {
+        color: #d2c5b0;
+      }
     </style>
   </head>
   <body>
@@ -111,18 +155,25 @@
       Đây cũng là quyết định khó nhất trong câu chuyện tình cảm của tôi, nó trở
       thành một bài toán cho đến nay tôi vẫn chưa thể giải được
     </p>
-    <button
-      class="leave"
-      onclick="showPopup('Rời đi ư? Chúng tôi đang sống với nhau kiểu tập thể (có sự góp mặt của cô ấy), nếu giờ tôi rời đi thì sẽ ảnh hưởng đến tập thể, vì cái lý do của tôi chỉ là vì một người mà rời đi thì nó sẽ phá vỡ sự cân bằng và vui vẻ vốn có. Tôi cảm thấy suy nghĩ ấy quá ích kỷ, chưa kể nếu tôi rời đi thì 1 2 bạn khác cũng sẽ rời đi như tôi mặc dù tôi chỉ muốn đi 1 mình.')"
-    >
-      Rời đi
-    </button>
-    <button
-      class="stay"
-      onclick="showPopup('Ở lại ư? Hướng này không ảnh hưởng đến ai nhưng chính tôi là người đau nhất mỗi lần kìm nén cảm xúc của mình, vì gần mặt nhưng cách lòng.')"
-    >
-      Ở lại
-    </button>
+    <div>
+      <button
+        class="leave"
+        onclick="showPopup('Chúng tôi đang sống với nhau kiểu tập thể (có sự góp mặt của cô ấy), nếu giờ tôi rời đi thì sẽ ảnh hưởng đến tập thể, vì cái lý do của tôi chỉ là vì một người mà rời đi thì nó sẽ phá vỡ sự cân bằng và vui vẻ vốn có. Tôi cảm thấy suy nghĩ ấy quá ích kỷ, chưa kể nếu tôi rời đi thì 1 2 bạn khác cũng sẽ rời đi như tôi mặc dù tôi chỉ muốn đi 1 mình.')"
+      >
+        Rời đi
+      </button>
+      <button
+        class="stay"
+        onclick="showPopup('Hướng này không ảnh hưởng đến ai nhưng chính tôi là người đau nhất mỗi lần kìm nén cảm xúc của mình, vì gần mặt nhưng cách lòng.')"
+      >
+        Ở lại
+      </button>
+    </div>
+    <div class="gmail">
+      <a href="./gmail.html"
+        >Tìm hiểu xong, bạn có ý kiến gì thì có thể viết ở đây nha</a
+      >
+    </div>
 
     <!-- Popup -->
     <div id="popup" class="popup">
@@ -132,13 +183,10 @@
       </div>
     </div>
 
-    <!-- Nút quay về trang chính ở dưới cùng -->
-
-    <div style="text-align: center; margin-top: 30px">
-      <a href="ketluan.html" class="back-btn">⬅ Quay lại kết luận</a>
-    </div>
-    <div style="text-align: center; margin-top: 20px">
-      <a href="modau.html" class="back-btn">⬅ Quay lại trang chính</a>
+    <!-- Nút quay về -->
+    <div>
+      <a href="ketluan.html" class="back-btn">⬅ Quay lại</a>
+      <a href="modau.html" class="back-btn">⬅ Trang chính</a>
     </div>
 
     <script>

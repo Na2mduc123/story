@@ -7,14 +7,36 @@
       body {
         margin: 0;
         font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #16222a, #3a6073);
-        color: #fff;
+        background: linear-gradient(
+          135deg,
+          #ff9a9e,
+          #fad0c4,
+          #fbc2eb,
+          #a1c4fd,
+          #c2e9fb
+        );
+        background-size: 400% 400%;
+        color: #222;
         min-height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
         padding: 20px;
+        animation: gradientFlow 18s ease infinite;
       }
+
+      @keyframes gradientFlow {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
       .box {
         max-width: 800px;
         background: rgba(255, 255, 255, 0.05);
@@ -26,8 +48,10 @@
       h2 {
         margin-top: 0;
         font-size: 28px;
-        color: #ffd166;
+        color: #1d3557; /* xanh navy đậm */
+        text-shadow: 2px 3px 8px rgba(0, 0, 0, 0.55); /* bóng đậm hơn, rõ ràng */
       }
+
       p {
         line-height: 1.6;
         font-size: 18px;
@@ -37,14 +61,35 @@
       .controls {
         margin-bottom: 20px;
       }
-      select,
-      button {
+      select {
         padding: 8px 12px;
         font-size: 16px;
         border-radius: 6px;
         border: none;
         margin: 5px;
       }
+      button {
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 16px;
+        padding: 8px 12px;
+        margin: 5px;
+        border: none;
+        border-radius: 6px;
+        background: linear-gradient(90deg, #ffd166, #ff9a8b);
+        color: #222;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(255, 209, 102, 0.4),
+          0 2px 6px rgba(255, 154, 139, 0.3);
+      }
+
+      button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(255, 209, 102, 0.6),
+          0 0 25px rgba(255, 154, 139, 0.5), 0 0 35px rgba(255, 209, 102, 0.4);
+        color: #fff;
+      }
+
       .error {
         color: red;
         margin-top: 10px;
@@ -54,31 +99,45 @@
         position: fixed;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%);
-        background: rgba(0, 0, 0, 0.8);
-        padding: 20px 30px;
-        border-radius: 10px;
-        font-size: 22px;
+        transform: translate(-50%, -50%) scale(0.8);
+        background: rgba(0, 0, 0, 0.85);
+        padding: 30px 50px;
+        border-radius: 12px;
+        font-size: 30px;
         font-weight: bold;
-        color: #ffd166;
+        color: #1cc040;
+        display: none;
+        animation: popupAnim 0.4s ease;
+      }
+
+      #chapterContent {
         display: none;
       }
-      .back-btn {
-        display: block;
-        margin-top: 20px;
-        text-align: center;
-        padding: 10px;
-        background: #ffd166;
-        color: #333;
-        border-radius: 6px;
-        text-decoration: none;
-        font-weight: bold;
+      #chapterContent a {
+        color: #be2222;
       }
-      #chapterContent {
-        display: none; /* ẩn nội dung chương cho tới khi chọn đúng */
-      }
+
       a {
         color: #ffd166;
+      }
+      .chapter-nav {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+      }
+
+      .back-btn,
+      .next-btn {
+        color: #ffd166;
+        font-weight: bold;
+        transition: 0.3s;
+        text-decoration: none;
+      }
+
+      .back-btn:hover,
+      .next-btn:hover {
+        color: #fff !important;
+        text-shadow: 0 0 8px #ffd166;
       }
     </style>
   </head>
@@ -86,7 +145,7 @@
     <div class="box">
       <!-- Chọn món quà -->
       <div class="controls" id="giftSection">
-        <label for="giftSelect">Chọn món quà đầu tiên: </label>
+        <h2>Chọn món quà đầu tặng cô ấy</h2>
         <select id="giftSelect">
           <option value="">-- Chọn quà --</option>
           <option value="hoa">Hoa</option>
@@ -103,32 +162,47 @@
         <h2>Chương 2: Thích và tỏ tình</h2>
         <p><i>Giai đoạn này kéo dài từ 3/2024 - đầu 7/2024</i></p>
         <p>
-          Sau vài tháng trò chuyện, cô dần trở thành một phần trong cuộc sống
-          của tôi. Mỗi tin nhắn, mỗi lần gặp gỡ đều khiến anh cảm thấy ngày càng
-          gắn bó hơn.
+          Tháng ngày trôi qua, chúng tôi bắt đầu nhận ra những rung động đặc
+          biệt trong lòng mình. Mỗi tin nhắn, mỗi lần gặp gỡ đều khiến trái tim
+          tôi rung lên nhịp dồn dập mà chưa từng trải qua trước đây.
         </p>
         <p>
-          Lần đồng hành thứ 2 của 2 đứa là khi đi quân sự, lúc đó đã bước vào
-          giai đoạn tìm hiểu rồi
+          Lần đồng hành thứ hai, khi đi quân sự, chúng tôi cùng nhau vượt qua
+          những thử thách nhỏ, trò chuyện, cười đùa và thậm chí là những khoảnh
+          khắc im lặng đầy ý nghĩa. Tôi bắt đầu thấy mình không thể thiếu cô ấy.
         </p>
         <p>
-          Sau khi về, tôi biết tôi không thể giữ được cái cảm xúc nó cứ trực
-          trào tuôn ra nữa, một ngày đầu tháng 6, tôi tặng quà cô ấy, nói tôi
-          thích cô ấy và khẳng định đây là thật lòng
+          Một buổi chiều đầu tháng 6, tôi quyết định tặng cô ấy món quà nhỏ.
+          Cùng với món quà, tôi thốt lên lời: Mọi lời đồn đầu có căn cứ cả và
+          chuyện tớ thích cậu là có thật" Khoảnh khắc ấy, trái tim tôi như vỡ
+          òa.
         </p>
         <p>
-          Rồi cái gì đến cũng phải đến, bạn thử đoán xem tôi tỏ tình cô ấy vào
-          dịp nào
-          <a href="./doan.html">Đoán thôi</a>
+          Cô ấy nhìn tôi và có thể đã nhận ra sự thay đổi của tôi từ trước khi
+          khoảnh khắc này diễn ra rồi
+        </p>
+        <p>
+          Nhưng chuyện tình chưa dừng lại ở đây… Liệu chúng tôi có thể cùng nhau
+          vượt qua những thử thách phía trước, hướng tới tương lai mà tôi vẫn
+          luôn mơ ước?
         </p>
 
-        <a
-          href="modau.html"
-          class="back-btn"
-          onclick="localStorage.setItem('chapterUnlocked', '3')"
-        >
-          ⬅ Quay lại
-        </a>
+        <div class="chapter-nav">
+          <a
+            href="chuong1.html"
+            class="back-btn"
+            onclick="localStorage.setItem('chapterUnlocked', '2')"
+          >
+            ⬅ Quay lại
+          </a>
+          <a
+            href="chuong3.html"
+            class="next-btn"
+            onclick="localStorage.setItem('chapterUnlocked', '3')"
+          >
+            Đọc tiếp ➡
+          </a>
+        </div>
       </div>
     </div>
 
