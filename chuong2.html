@@ -175,6 +175,7 @@
           font-size: 34px;
           text-align: center;
         }
+
         .center-msg {
           font-size: 36px;
           padding: 15px;
@@ -185,7 +186,6 @@
   </head>
   <body>
     <div class="box">
-      <!-- Chọn món quà -->
       <div class="controls" id="giftSection">
         <h2>Chọn món quà đầu tặng cô ấy</h2>
         <select id="giftSelect">
@@ -258,14 +258,12 @@
         const centerMsg = document.getElementById("centerMsg");
         const chapter = document.getElementById("chapterContent");
         const giftSection = document.getElementById("giftSection");
-
         msgEl.textContent = "";
 
         if (!gift) {
           msgEl.textContent = "Bạn chưa chọn món quà nào.";
           return;
         }
-
         if (gift === "hoa") {
           msgEl.textContent = "Tôi không chọn cái này.";
         } else if (gift === "banhkeo") {

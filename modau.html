@@ -13,9 +13,11 @@
         --muted: rgba(255, 255, 255, 0.75);
         --radius: 12px;
       }
+
       * {
         box-sizing: border-box;
       }
+
       body {
         margin: 0;
         font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
@@ -27,11 +29,9 @@
           #0b1220 100%
         );
         color: var(--text);
-
         display: flex;
         justify-content: center;
         align-items: center;
-
         padding: 28px;
       }
 
@@ -43,11 +43,13 @@
         border-radius: var(--radius);
         box-shadow: 0 8px 30px rgba(2, 6, 23, 0.6);
       }
+
       h1 {
         margin: 0 0 14px 0;
         font-size: 20px;
         letter-spacing: -0.01em;
       }
+
       .list {
         margin: 18px 0 0 0;
         padding: 0;
@@ -55,6 +57,7 @@
         display: grid;
         gap: 12px;
       }
+
       .item {
         display: flex;
         align-items: flex-start;
@@ -67,6 +70,7 @@
           rgba(255, 255, 255, 0.01)
         );
       }
+
       .index {
         min-width: 44px;
         height: 44px;
@@ -78,23 +82,27 @@
         color: #0b0b0b;
         flex-shrink: 0;
       }
+
       .meta {
         flex: 1;
       }
+
       .meta h3 {
         margin: 0;
         font-size: 16px;
       }
+
       .meta p {
         margin: 6px 0 0 0;
         color: var(--muted);
         font-size: 14px;
         line-height: 1.35;
       }
+
       .toggle-btn,
       .review-btn {
-        display: block; /* biến thành block */
-        margin: 20px auto 0; /* căn giữa ngang và cách trên 20px */
+        display: block;
+        margin: 20px auto 0;
         background: none;
         border: 1px solid rgba(16, 198, 32, 0.06);
         background-color: #d3a667;
@@ -110,39 +118,48 @@
         color: #aaa;
         cursor: not-allowed;
       }
+
       .toggle-btn.locked a {
         pointer-events: none;
         color: #aaa;
       }
+
       @media (max-width: 540px) {
         .item {
           flex-direction: column;
           align-items: stretch;
         }
+
         .toggle-btn,
         .review-btn {
           width: 100%;
           margin-left: 0;
           margin-top: 6px;
         }
+
         .index {
           align-self: flex-start;
         }
       }
+
       button a {
         text-decoration: none;
         color: #ffffff;
       }
+
       h1 {
         text-align: center;
       }
+
       .gmail a {
         color: #ff9500;
       }
+
       /* Chương 1: xanh tím huyền bí */
       .item[data-ch="1"] .index {
         background: linear-gradient(135deg, #345083, #1f76d8);
       }
+
       .item[data-ch="1"] {
         background: linear-gradient(
           180deg,
@@ -155,6 +172,7 @@
       .item[data-ch="2"] .index {
         background: linear-gradient(135deg, #ff512f, #dd2476);
       }
+
       .item[data-ch="2"] {
         background: linear-gradient(
           180deg,
@@ -179,6 +197,7 @@
       .item[data-ch="4"] .index {
         background: linear-gradient(135deg, #11998e, #38ef7d);
       }
+
       .item[data-ch="4"] {
         background: linear-gradient(
           180deg,
