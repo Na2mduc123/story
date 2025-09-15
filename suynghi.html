@@ -2,12 +2,13 @@
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Suy nghĩ</title>
     <style>
       body {
         font-family: Arial, sans-serif;
         text-align: center;
-        padding-top: 40px;
+        padding: 20px;
         min-height: 100vh;
         margin: 0;
         display: flex;
@@ -33,26 +34,31 @@
 
       h1 {
         margin-bottom: 20px;
+        font-size: clamp(18px, 5vw, 28px);
       }
+
       p {
         margin: 10px auto 20px;
         max-width: 600px;
         line-height: 1.5;
+        font-size: clamp(14px, 4vw, 18px);
       }
 
       button {
         padding: 10px 20px;
-        margin: 10px;
+        margin: 10px 5px;
         border: none;
         border-radius: 8px;
         cursor: pointer;
-        font-size: 16px;
+        font-size: clamp(14px, 4vw, 16px);
         font-weight: bold;
         transition: 0.3s;
         color: #fff;
+        min-width: 120px;
       }
       .leave {
         background-color: #e74c3c;
+        margin-top: 20px;
       }
       .stay {
         background-color: #2ecc71;
@@ -61,7 +67,6 @@
         opacity: 0.85;
       }
 
-      /* Popup nền mờ */
       .popup {
         display: none;
         position: fixed;
@@ -73,22 +78,22 @@
         z-index: 999;
         justify-content: center;
         align-items: center;
+        padding: 10px;
+        box-sizing: border-box;
       }
 
-      /* Nội dung popup */
       .popup-content {
         background: white;
-        padding: 25px;
+        padding: 20px;
         border-radius: 12px;
         text-align: justify;
-        max-width: 500px;
-        font-size: 15px;
+        max-width: 90%;
+        font-size: clamp(14px, 4vw, 16px);
         color: #111;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         animation: fadeIn 0.3s ease-in-out;
       }
 
-      /* Nút đóng */
       .close-btn {
         margin-top: 15px;
         padding: 8px 16px;
@@ -97,7 +102,7 @@
         background: #3498db;
         color: white;
         cursor: pointer;
-        font-size: 14px;
+        font-size: clamp(12px, 4vw, 14px);
         font-weight: bold;
         display: block;
         margin-left: auto;
@@ -109,13 +114,29 @@
 
       .back-btn {
         display: inline-block;
-        margin: 15px 10px 0;
+        margin: 10px 5px 0;
         padding: 8px 16px;
         background: #ffd166;
         color: #333;
         border-radius: 6px;
         text-decoration: none;
         font-weight: bold;
+        font-size: clamp(12px, 4vw, 16px);
+        white-space: nowrap;
+      }
+
+      .gmail {
+        display: block;
+        margin: 20px auto 0;
+        font-weight: 600;
+        text-align: center;
+      }
+      .gmail a {
+        color: #e5ff00;
+        text-decoration: underline;
+      }
+      .gmail a:hover {
+        color: #efc178;
       }
 
       @keyframes fadeIn {
@@ -129,23 +150,35 @@
         }
       }
 
-      .gmail {
-        display: block;
-        margin: 20px auto 0;
-        background: none;
-
-        color: #fff;
-        padding: 8px 10px;
-
-        cursor: pointer;
-        font-weight: 600;
-        text-align: center;
-      }
-      .gmail a {
-        color: #695534;
-      }
-      .gmail a:hover {
-        color: #d2c5b0;
+      @media (max-width: 768px) {
+        body {
+          padding: 10px;
+        }
+        h1 {
+          margin-bottom: 15px;
+        }
+        p {
+          margin-bottom: 15px;
+        }
+        button {
+          width: 100%;
+          margin: 8px 0;
+        }
+        .back-btn {
+          width: auto;
+          margin: 8px 4px;
+          text-align: center;
+          padding: 6px 12px;
+          font-size: 14px;
+        }
+        .popup-content {
+          max-width: 95%;
+          padding: 15px;
+          font-size: 14px;
+        }
+        .gmail {
+          margin-bottom: 20px;
+        }
       }
     </style>
   </head>
@@ -155,6 +188,7 @@
       Đây cũng là quyết định khó nhất trong câu chuyện tình cảm của tôi, nó trở
       thành một bài toán cho đến nay tôi vẫn chưa thể giải được
     </p>
+
     <div>
       <button
         class="leave"
@@ -169,10 +203,9 @@
         Ở lại
       </button>
     </div>
+
     <div class="gmail">
-      <a href="./gmail.html"
-        >Đọc xong bài, bạn có ý kiến gì thì có thể viết ở đây nha</a
-      >
+      <a href="./gmail.html">Bạn có ý kiến gì thì có thể viết ở đây nha</a>
     </div>
 
     <!-- Popup -->

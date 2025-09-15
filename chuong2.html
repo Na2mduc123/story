@@ -2,11 +2,23 @@
 <html lang="vi">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chương 2: Thích và tỏ tình</title>
     <style>
+      /* Reset scroll ngang */
+      html,
       body {
         margin: 0;
+        padding: 0;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
         font-family: Arial, sans-serif;
+        color: #222;
+      }
+
+      body {
+        min-height: 100vh;
         background: linear-gradient(
           135deg,
           #ff9a9e,
@@ -16,13 +28,12 @@
           #c2e9fb
         );
         background-size: 400% 400%;
-        color: #222;
-        min-height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
         padding: 20px;
         animation: gradientFlow 18s ease infinite;
+        box-sizing: border-box;
       }
 
       @keyframes gradientFlow {
@@ -38,18 +49,22 @@
       }
 
       .box {
+        width: 100%;
         max-width: 800px;
         background: rgba(255, 255, 255, 0.05);
-        padding: 40px;
+        padding: 20px;
         border-radius: 12px;
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
         text-align: center;
+        box-sizing: border-box;
+        overflow-x: hidden;
       }
+
       h2 {
         margin-top: 0;
         font-size: 28px;
-        color: #1d3557; /* xanh navy đậm */
-        text-shadow: 2px 3px 8px rgba(0, 0, 0, 0.55); /* bóng đậm hơn, rõ ràng */
+        color: #1d3557;
+        text-shadow: 2px 3px 8px rgba(0, 0, 0, 0.55);
       }
 
       p {
@@ -57,10 +72,14 @@
         font-size: 18px;
         margin: 16px 0;
         text-align: justify;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
       }
+
       .controls {
         margin-bottom: 20px;
       }
+
       select {
         padding: 8px 12px;
         font-size: 16px;
@@ -68,6 +87,7 @@
         border: none;
         margin: 5px;
       }
+
       button {
         cursor: pointer;
         font-weight: bold;
@@ -95,34 +115,44 @@
         margin-top: 10px;
         font-weight: bold;
       }
+
       .center-msg {
         position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%) scale(0.8);
         background: rgba(0, 0, 0, 0.85);
-        padding: 30px 50px;
+        padding: 20px 30px;
         border-radius: 12px;
-        font-size: 30px;
+        font-size: 24px;
         font-weight: bold;
         color: #1cc040;
         display: none;
         animation: popupAnim 0.4s ease;
+        max-width: 90vw;
+        text-align: center;
+        box-sizing: border-box;
       }
 
       #chapterContent {
         display: none;
       }
+
       #chapterContent a {
         color: #be2222;
+        word-wrap: break-word;
       }
 
       a {
         color: #ffd166;
+        word-wrap: break-word;
       }
+
       .chapter-nav {
         display: flex;
         justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
         margin-top: 20px;
       }
 
@@ -138,6 +168,18 @@
       .next-btn:hover {
         color: #fff !important;
         text-shadow: 0 0 8px #ffd166;
+      }
+
+      @media (max-width: 768px) {
+        h2 {
+          font-size: 34px;
+          text-align: center;
+        }
+        .center-msg {
+          font-size: 36px;
+          padding: 15px;
+          width: 300px;
+        }
       }
     </style>
   </head>
@@ -173,13 +215,13 @@
         </p>
         <p>
           Một buổi chiều đầu tháng 6, tôi quyết định tặng cô ấy món quà nhỏ.
-          Cùng với món quà, tôi thốt lên lời: Mọi lời đồn đầu có căn cứ cả và
-          chuyện tớ thích cậu là có thật" Khoảnh khắc ấy, trái tim tôi như vỡ
+          Cùng với món quà, tôi thốt lên lời: "Mọi lời đồn đều có căn cứ cả và
+          chuyện tớ thích cậu là có thật". Khoảnh khắc ấy, trái tim tôi như vỡ
           òa.
         </p>
         <p>
           Cô ấy nhìn tôi và có thể đã nhận ra sự thay đổi của tôi từ trước khi
-          khoảnh khắc này diễn ra rồi
+          khoảnh khắc này diễn ra rồi.
         </p>
         <p>
           Nhưng chuyện tình chưa dừng lại ở đây… Liệu chúng tôi có thể cùng nhau

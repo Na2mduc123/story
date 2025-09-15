@@ -2,6 +2,8 @@
 <html lang="vi">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Chương 1: Làm quen</title>
     <style>
       body {
@@ -16,6 +18,11 @@
         justify-content: center;
         padding: 20px;
         animation: gradientWave 15s ease-in-out infinite;
+        font-size: 18px;
+        -webkit-text-size-adjust: 100%;
+        -moz-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-size-adjust: 100%;
       }
 
       @keyframes gradientWave {
@@ -45,6 +52,8 @@
           0 0 20px rgba(168, 237, 234, 0.15);
         display: none;
         animation: fadeIn 1s ease;
+        height: auto;
+        overflow-y: auto;
       }
 
       @keyframes fadeIn {
@@ -61,7 +70,7 @@
       h2 {
         margin-top: 0;
         font-size: 32px;
-        color: #fff; /* trắng sáng dễ đọc */
+        color: #fff;
         text-align: center;
         text-shadow: 0 0 6px rgba(255, 209, 102, 0.8),
           0 0 12px rgba(255, 209, 102, 0.6), 0 0 20px rgba(255, 209, 102, 0.4);
@@ -69,7 +78,6 @@
 
       p {
         line-height: 1.7;
-        font-size: 18px;
         margin: 18px 0;
         text-align: justify;
       }
@@ -78,14 +86,16 @@
         text-align: center;
         animation: fadeIn 1s ease;
       }
-
+      i {
+        font-size: 18px;
+      }
       select,
       button {
         padding: 12px 16px;
         margin: 8px;
         border-radius: 8px;
         border: none;
-        font-size: 16px;
+        font-size: 18px;
         transition: all 0.3s ease;
       }
 
@@ -121,7 +131,7 @@
         background: rgba(0, 0, 0, 0.85);
         padding: 30px 50px;
         border-radius: 12px;
-        font-size: 30px;
+        font-size: 22px;
         font-weight: bold;
         color: #1cc040;
         display: none;
@@ -157,6 +167,53 @@
       .next-btn:hover {
         color: #fff;
         text-shadow: 0 0 8px #ffd166;
+      }
+
+      /* 📱 Responsive cho mobile */
+      @media (max-width: 768px) {
+        body {
+          padding: 5px;
+          height: 100vh;
+        }
+
+        .chapter {
+          max-width: 100%;
+          padding: 10px;
+          font-size: 18px;
+        }
+
+        h2 {
+          font-size: 32px;
+        }
+
+        select,
+        button {
+          width: 100%;
+          margin: 4px 0;
+          padding: 8px 12px;
+          font-size: 16px;
+        }
+
+        .popup {
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%) scale(0.8);
+          background: rgba(0, 0, 0, 0.85);
+          padding: 10px 20px;
+          border-radius: 12px;
+          font-size: 32px;
+          font-weight: bold;
+          color: #1cc040;
+          display: none;
+          animation: popupAnim 0.4s ease;
+          width: 300px;
+          text-align: center;
+        }
+
+        .chapter-nav {
+          justify-content: space-between;
+        }
       }
     </style>
   </head>
@@ -231,7 +288,6 @@
       const chapterContent = document.getElementById("chapterContent");
       const setup = document.querySelector(".setup");
 
-      // gradient di chuyển theo chuột
       document.addEventListener("mousemove", (e) => {
         const x = (e.clientX / window.innerWidth) * 100;
         const y = (e.clientY / window.innerHeight) * 100;

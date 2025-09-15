@@ -2,19 +2,27 @@
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Khám phá nốt trầm</title>
     <style>
+      html,
       body {
         margin: 0;
-        height: 100vh;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
         background: linear-gradient(135deg, #434343, #2c3e50, #3a1c71, #1a1a1a);
         background-size: 400% 400%;
         display: flex;
         align-items: center;
         justify-content: center;
-        overflow: hidden;
-        font-family: Arial, sans-serif;
         animation: moodFlow 18s ease infinite;
+        position: relative;
       }
 
       @keyframes moodFlow {
@@ -31,58 +39,61 @@
 
       h1 {
         position: absolute;
-        top: 20px;
+        top: 10px;
         left: 50%;
         transform: translateX(-50%);
         color: #fff;
-
+        font-size: clamp(14px, 2vw, 20px);
         white-space: nowrap;
+        text-align: center;
       }
       .dep {
         position: absolute;
-        top: 80px;
+        top: 50px;
         left: 50%;
         transform: translateX(-50%);
         color: #fff;
-        font-size: 18px;
+        font-size: clamp(12px, 1.5vw, 16px);
+        text-align: center;
       }
       .circle {
-        width: 100px;
-        height: 100px;
+        width: clamp(40px, 12vw, 70px);
+        height: clamp(40px, 12vw, 70px);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         color: white;
         font-weight: bold;
-        font-size: 18px;
+        font-size: clamp(10px, 1.8vw, 14px);
         cursor: grab;
         position: absolute;
         user-select: none;
       }
       #me {
-        background: #3a6073; /* xanh xám lạnh */
+        background: #3a6073;
         top: 50%;
-        left: 20%;
+        left: 25%;
         transform: translate(-50%, -50%);
       }
 
       #her {
-        background: #6a1e55; /* tím rượu vang trầm */
+        background: #6a1e55;
         top: 50%;
-        left: 70%;
+        left: 75%;
         transform: translate(-50%, -50%);
         transition: all 0.3s ease;
       }
 
       .button-container {
         position: absolute;
-        bottom: 40px;
-        text-align: center;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
       }
       .btn {
-        padding: 12px 20px;
-        font-size: 16px;
+        padding: 10px 18px;
+        font-size: clamp(12px, 1.8vw, 16px);
         border-radius: 8px;
         background: #ffd166;
         color: #333;
@@ -95,6 +106,37 @@
       .btn:hover {
         background: #ffb703;
       }
+      @media (max-width: 768px) {
+        h1 {
+          top: 75px;
+          font-size: 20px;
+          white-space: normal; /* Cho phép xuống dòng nếu cần */
+          padding: 0 10px;
+          width: 100%;
+        }
+        .dep {
+          top: 200px;
+          font-size: 16px;
+          padding: 0 10px;
+          white-space: normal;
+          width: 100%;
+        }
+        #me {
+          left: 40%;
+          top: 55%;
+        }
+        #her {
+          left: 60%;
+          top: 55%;
+        }
+        .button-container {
+          margin-bottom: 70px;
+        }
+        .button-container a {
+          font-size: 25px;
+          white-space: nowrap;
+        }
+      }
     </style>
   </head>
   <body>
@@ -103,7 +145,6 @@
     <div id="me" class="circle">Tôi</div>
     <div id="her" class="circle">Cô ấy</div>
 
-    <!-- Nút chuyển sang file lý do -->
     <div class="button-container">
       <a href="./lydo.html" class="btn">Tìm hiểu lý do</a>
     </div>
@@ -112,9 +153,50 @@
       const me = document.getElementById("me");
       const her = document.getElementById("her");
       let isDragging = false;
-
       let offsetX, offsetY;
 
+      function resetPositions() {
+        me.style.left = "25%";
+        me.style.top = "50%";
+        her.style.left = "75%";
+        her.style.top = "50%";
+      }
+      resetPositions();
+
+      function moveMe(x, y) {
+        const maxX = window.innerWidth - me.offsetWidth;
+        const maxY = window.innerHeight - me.offsetHeight;
+        const newLeft = Math.min(Math.max(0, x - offsetX), maxX);
+        const newTop = Math.min(Math.max(0, y - offsetY), maxY);
+
+        me.style.left = newLeft + "px";
+        me.style.top = newTop + "px";
+
+        const meRect = me.getBoundingClientRect();
+        const herRect = her.getBoundingClientRect();
+
+        const dx = meRect.left - herRect.left;
+        const dy = meRect.top - herRect.top;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < 120) {
+          // giảm ngưỡng một chút vì vòng tròn nhỏ hơn
+          const padding = 20;
+          const newX =
+            Math.random() *
+              (window.innerWidth - her.offsetWidth - padding * 2) +
+            padding;
+          const newY =
+            Math.random() *
+              (window.innerHeight - her.offsetHeight - padding * 2) +
+            padding;
+
+          her.style.left = newX + "px";
+          her.style.top = newY + "px";
+        }
+      }
+
+      // PC Drag
       me.addEventListener("mousedown", (e) => {
         isDragging = true;
         offsetX = e.clientX - me.offsetLeft;
@@ -129,25 +211,28 @@
 
       document.addEventListener("mousemove", (e) => {
         if (!isDragging) return;
-        const x = e.clientX - offsetX;
-        const y = e.clientY - offsetY;
-        me.style.left = x + "px";
-        me.style.top = y + "px";
-
-        const meRect = me.getBoundingClientRect();
-        const herRect = her.getBoundingClientRect();
-
-        const dx = meRect.left - herRect.left;
-        const dy = meRect.top - herRect.top;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        if (distance < 150) {
-          const newX = Math.random() * (window.innerWidth - 120) + 60;
-          const newY = Math.random() * (window.innerHeight - 120) + 60;
-          her.style.left = newX + "px";
-          her.style.top = newY + "px";
-        }
+        moveMe(e.clientX, e.clientY);
       });
+
+      // Mobile Drag
+      me.addEventListener("touchstart", (e) => {
+        isDragging = true;
+        const touch = e.touches[0];
+        offsetX = touch.clientX - me.offsetLeft;
+        offsetY = touch.clientY - me.offsetTop;
+      });
+
+      document.addEventListener("touchend", () => {
+        isDragging = false;
+      });
+
+      document.addEventListener("touchmove", (e) => {
+        if (!isDragging) return;
+        const touch = e.touches[0];
+        moveMe(touch.clientX, touch.clientY);
+      });
+
+      window.addEventListener("resize", resetPositions);
     </script>
   </body>
 </html>

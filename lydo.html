@@ -2,6 +2,7 @@
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lý do</title>
     <style>
       body {
@@ -62,8 +63,8 @@
         border: none;
         margin: 8px;
         cursor: pointer;
-        /* Giữ nguyên màu mặc định ban đầu */
       }
+
       button {
         cursor: pointer;
         font-weight: bold;
@@ -85,6 +86,7 @@
           0 0 25px rgba(255, 154, 139, 0.5), 0 0 35px rgba(255, 209, 102, 0.4);
         color: #fff;
       }
+
       .error {
         color: #ff6b6b;
         margin-top: 12px;
@@ -104,6 +106,39 @@
         color: #1cc040;
         display: none;
         animation: popupAnim 0.4s ease;
+        text-align: center;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        body {
+          padding: 10px;
+        }
+
+        .box {
+          max-width: 100%;
+          padding: 20px;
+        }
+
+        h2 {
+          font-size: 35px;
+        }
+
+        select,
+        button {
+          display: block; /* fix: chiếm nguyên dòng */
+          width: 100%; /* ngang full */
+          font-size: 16px;
+          padding: 15px;
+          margin: 10px 0; /* cách đều trên dưới */
+          box-sizing: border-box;
+        }
+
+        .center-msg {
+          font-size: 38px;
+          padding: 10px 20px;
+          width: 350px;
+        }
       }
     </style>
   </head>
